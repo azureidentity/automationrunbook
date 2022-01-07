@@ -1,4 +1,12 @@
-# Readme
+# Table of contents
+
+- [Overview](#automation-account-runbook-and-authentiation)
+  - [Managed Identity](#managed-identity)
+  - [Runas Connection](#runas-connection)
+  - [Saved Credentials](#saved-credentials)
+  - [Hybrid Runbook Worker](#hybrid-runbook-worker)
+  
+# Automation Account Runbook and Authentiation
 This repository is built to host the sample scripts (mostly PowerShell) when you test Azure Automation Account - Runbook authentication options.
 ## Managed Identity
 Using managed identity could let us to get the credential/token from runbook passwordless. The detailed instructions can be found from Azure public doc location below:

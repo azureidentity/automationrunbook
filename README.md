@@ -1,4 +1,4 @@
-# Table of contents
+# Table of Contents
 
 - [Overview](#automation-account-runbook-and-authentiation)
   - [Managed Identity](#managed-identity)
@@ -85,7 +85,6 @@ $azProfile = Connect-AzAccount -Tenant $conn.TenantID `
     -ApplicationId $conn.ApplicationID `
     -CertificateThumbprint $conn.CertificateThumbprint `
     -ServicePrincipal
-
 $azProfile 
 
 "`n===== get azure resource group "
@@ -95,7 +94,6 @@ Get-AzResourceGroup | Select-Object ResourceId
 $aadContext = Connect-AzureAD -TenantId $conn.TenantID `
     -ApplicationId $conn.ApplicationID `
     -CertificateThumbprint $conn.CertificateThumbprint 
-
 $aadContext
 
 "`n===== get domains in aad"
@@ -156,13 +154,12 @@ Connect-AzAccount -ServicePrincipal -Tenant $conn.TenantID `
     -CertificateThumbprint $conn.CertificateThumbprint
 
 Get-AzContext -ListAvailable
-
 ```
 
 ## Saved Credentials
 A common way to login Azure without actual user account is to use service principal + secret. The detailed steps of creating such service principal could be found at https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal#get-tenant-and-app-id-values-for-signing-in
 
-After the username (appid/client_id) and password (secret) is saved in automation account:
+To use the username (appid/client_id) and password (secret) saved in automation account, shared resource:
 ```
 "===== get saved cred"
 $cred = Get-AutomationPSCredential -Name "runasapp-demo-cred"
@@ -181,7 +178,7 @@ Get-AzResourceGroup | Select-Object ResourceId
 ## Hybrid Runbook Worker 
 
 ### Windows - PowerShell 5.1
-By default, HRW on Windows runs the script using **nt authority\system**. You can change the context in HWR settings.
+By default, HRW on Windows runs the script using **nt authority\system**. You can change the context in HRW settings.
 ```
 Param(
     [Parameter(Mandatory=$True)]
@@ -203,7 +200,7 @@ New-LocalUser -Name $Username -Password $securePassword -Description "created by
 ```
 
 ### Linux - Python 2.6
-HRW on Linux runs the script using **hweautomation**. Changing the context in HWR settings **is not** effective as Windows.
+HRW on Linux runs the script using **hweautomation**. Changing the context in HWR settings is **not** effective as Windows.
 ```
 import sys
 import os
@@ -224,4 +221,3 @@ os.system(cmdToRun)
 #print(cmdToRun)
 print("=== user created with password " + passwordPlainText)
 ```
-
